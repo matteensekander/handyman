@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mike's Handyman Services — reliable home repairs in the greater metro area. Plumbing, electrical, carpentry, painting, and more. Licensed & insured. Free estimates.">
+  <title>Mike's Handyman Services | Professional Home Repairs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #1a1a1a; background: #fff; line-height: 1.6; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    ul, ol { list-style: none; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+    input, select, textarea { font-family: inherit; }
+
+    /* ── TOKENS ────────────────────────────────────────── */
+    :root {
+      --accent: #E8600A;
+      --accent-dk: #c94f05;
+      --accent-lt: #fff3eb;
+      --text: #1a1a1a;
+      --muted: #5c5c5c;
+      --border: #e8e8e8;
+      --bg-alt: #f8f6f3;
+      --white: #fff;
+      --radius: 10px;
+      --shadow: 0 2px 16px rgba(0,0,0,.08);
+      --shadow-md: 0 6px 28px rgba(0,0,0,.12);
+    }
+
+    /* ── SKIP LINK ─────────────────────────────────────── */
+    .skip-link {
+      position: absolute; top: -200%; left: 1rem;
+      background: var(--accent); color: #fff;
+      padding: .5rem 1.25rem; border-radius: 0 0 8px 8px;
+      font-weight: 700; font-size: .875rem; z-index: 9999;
+      transition: top .15s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── UTILITIES ─────────────────────────────────────── */
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+
+    .tag {
+      display: inline-block;
+      background: var(--accent-lt); color: var(--accent);
+      font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .3rem .85rem;
+      border-radius: 100px; margin-bottom: .75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800; line-height: 1.15; color: var(--text);
+      margin-bottom: .9rem;
+    }
+
+    .section-sub {
+      font-size: 1.0625rem; color: var(--muted); max-width: 540px; line-height: 1.65;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .875rem 1.75rem; border-radius: 6px;
+      font-size: .9375rem; font-weight: 600;
+      transition: background .15s, color .15s, transform .15s, box-shadow .15s;
+      white-space: nowrap;
+    }
+    .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dk); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(232,96,10,.35); }
+    .btn-ghost { border: 2px solid rgba(255,255,255,.45); color: #fff; }
+    .btn-ghost:hover { background: #fff; color: var(--text); transform: translateY(-1px); }
+    .btn-outline { border: 2px solid var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── HEADER ────────────────────────────────────────── */
+    #header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: #fff; border-bottom: 1px solid var(--border);
+      transition: box-shadow .2s;
+    }
+    #header.scrolled { box-shadow: var(--shadow); }
+
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px; gap: 1.5rem;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: 1.125rem; font-weight: 800; color: var(--text); flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 36px; height: 36px; background: var(--accent); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    .main-nav { display: flex; align-items: center; gap: .125rem; }
+    .main-nav a {
+      padding: .4rem .75rem; border-radius: 6px;
+      font-size: .875rem; font-weight: 500; color: var(--muted);
+      transition: color .15s, background .15s;
+    }
+    .main-nav a:hover, .main-nav a.active { color: var(--accent); background: var(--accent-lt); }
+
+    .header-phone {
+      display: flex; align-items: center; gap: .45rem;
+      font-weight: 700; font-size: .9375rem; color: var(--text);
+      background: var(--accent-lt); padding: .5rem 1rem; border-radius: 6px;
+      transition: background .15s, color .15s; flex-shrink: 0;
+    }
+    .header-phone:hover { background: var(--accent); color: #fff; }
+
+    .menu-btn {
+      display: none; align-items: center; justify-content: center;
+      padding: .5rem; border-radius: 6px; color: var(--text);
+    }
+    .menu-btn:hover { background: var(--bg-alt); }
+
+    /* mobile nav drawer */
+    .mobile-nav {
+      display: none; position: fixed;
+      top: 68px; left: 0; right: 0; bottom: 0;
+      background: #fff; z-index: 999;
+      padding: 1.5rem; flex-direction: column; gap: .375rem;
+      overflow-y: auto;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      padding: .875rem 1rem; border-radius: 8px;
+      font-size: 1.0625rem; font-weight: 600; color: var(--text);
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav a:hover { color: var(--accent); background: var(--accent-lt); }
+    .mobile-nav-phone {
+      margin-top: 1rem;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      background: var(--accent); color: #fff;
+      padding: 1rem; border-radius: 8px;
+      font-size: 1.125rem; font-weight: 700; border-bottom: none !important;
+    }
+
+    /* ── HERO ──────────────────────────────────────────── */
+    #hero {
+      position: relative; min-height: 92vh;
+      display: flex; align-items: center;
+      margin-top: 68px; overflow: hidden; background: #111;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1920&q=75') center/cover no-repeat;
+      opacity: .38;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 680px; padding: 4.5rem 0; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      border: 1px solid rgba(232,96,10,.45); color: #ff9457;
+      background: rgba(232,96,10,.1);
+      padding: .35rem .9rem; border-radius: 100px;
+      font-size: .75rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 3.75rem);
+      font-weight: 800; line-height: 1.1; color: #fff;
+      margin-bottom: 1.25rem;
+    }
+    .hero-title span { color: var(--accent); }
+
+    .hero-tagline { font-size: 1.1875rem; color: rgba(255,255,255,.78); margin-bottom: 2.25rem; }
+
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2.75rem; }
+
+    .hero-trust { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .trust-item {
+      display: flex; align-items: center; gap: .5rem;
+      color: rgba(255,255,255,.7); font-size: .875rem; font-weight: 500;
+    }
+    .trust-item svg { flex-shrink: 0; }
+
+    /* ── SERVICES ──────────────────────────────────────── */
+    #services { padding: 6rem 0; background: var(--bg-alt); }
+    .services-hd { text-align: center; margin-bottom: 3rem; }
+    .services-hd .section-sub { margin: 0 auto; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+      gap: 1.125rem;
+    }
+    .service-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem 1.5rem;
+      transition: box-shadow .2s, transform .2s, border-color .2s;
+    }
+    .service-card:hover {
+      box-shadow: var(--shadow-md); transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+    .svc-icon {
+      width: 48px; height: 48px; background: var(--accent-lt);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .svc-icon svg { width: 22px; height: 22px; color: var(--accent); }
+    .service-card h3 { font-size: .9375rem; font-weight: 700; margin-bottom: .375rem; }
+    .service-card p { font-size: .8125rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── ABOUT ─────────────────────────────────────────── */
+    #about { padding: 6rem 0; }
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .about-photo-wrap { position: relative; }
+    .about-photo-wrap img {
+      width: 100%; height: 520px; object-fit: cover;
+      border-radius: 16px;
+    }
+    .exp-badge {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      background: var(--accent); color: #fff;
+      padding: 1.25rem 1.5rem; border-radius: var(--radius);
+      text-align: center; box-shadow: var(--shadow-md);
+    }
+    .exp-badge .num { display: block; font-size: 2.25rem; font-weight: 800; line-height: 1; }
+    .exp-badge .lbl { font-size: .75rem; font-weight: 600; opacity: .9; }
+
+    .about-text .section-sub { margin-bottom: 1.5rem; }
+    .about-bio { font-size: 1rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: .625rem; margin-bottom: 2rem; }
+    .pill {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .4rem .95rem; border: 1.5px solid var(--border);
+      border-radius: 100px; font-size: .8125rem; font-weight: 600; color: var(--text);
+    }
+    .pill svg { width: 13px; height: 13px; color: var(--accent); }
+
+    .about-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; border-top: 1px solid var(--border); padding-top: 1.5rem;
+    }
+    .stat { text-align: center; }
+    .stat .n { display: block; font-size: 1.875rem; font-weight: 800; color: var(--accent); }
+    .stat .l { font-size: .8125rem; color: var(--muted); font-weight: 500; }
+
+    /* ── HOW IT WORKS ──────────────────────────────────── */
+    #how { padding: 6rem 0; background: var(--bg-alt); }
+    .how-hd { text-align: center; margin-bottom: 3rem; }
+    .how-hd .section-sub { margin: 0 auto; }
+
+    .steps {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; position: relative;
+    }
+    .steps::before {
+      content: ''; position: absolute;
+      top: 2.5rem; left: calc(16.67% + 1.5rem); right: calc(16.67% + 1.5rem);
+      height: 2px; background: var(--accent); opacity: .18; pointer-events: none;
+    }
+    .step-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2.5rem 1.75rem;
+      text-align: center; position: relative;
+    }
+    .step-num {
+      width: 52px; height: 52px; background: var(--accent); color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1.375rem; font-weight: 800; margin: 0 auto 1.25rem;
+    }
+    .step-card h3 { font-size: 1.0625rem; font-weight: 700; margin-bottom: .5rem; }
+    .step-card p { font-size: .9rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── GALLERY ───────────────────────────────────────── */
+    #gallery { padding: 6rem 0; }
+    .gallery-hd { text-align: center; margin-bottom: 3rem; }
+    .gallery-hd .section-sub { margin: 0 auto; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 260px 260px;
+      gap: 1rem;
+    }
+    .gal-item { overflow: hidden; border-radius: var(--radius); position: relative; }
+    .gal-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+    .gal-item:hover img { transform: scale(1.04); }
+    .gal-item::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.28) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* ── TESTIMONIALS ──────────────────────────────────── */
+    #testimonials { padding: 6rem 0; background: var(--bg-alt); }
+    .test-hd { text-align: center; margin-bottom: 3rem; }
+    .test-hd .section-sub { margin: 0 auto; }
+
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .test-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem;
+    }
+    .stars { margin-bottom: 1rem; color: #f59e0b; font-size: 1rem; letter-spacing: .075em; }
+    .test-quote {
+      font-size: .9625rem; color: var(--text); line-height: 1.75;
+      font-style: italic; margin-bottom: 1.5rem;
+    }
+    .test-author { display: flex; align-items: center; gap: .75rem; }
+    .avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--accent-lt); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.125rem; font-weight: 800; flex-shrink: 0;
+    }
+    .author-name { font-weight: 700; font-size: .9375rem; }
+    .author-job { font-size: .8rem; color: var(--muted); }
+
+    /* ── PRICING ───────────────────────────────────────── */
+    #pricing { padding: 6rem 0; }
+    .pricing-hd { text-align: center; margin-bottom: 3rem; }
+    .pricing-hd .section-sub { margin: 0 auto; }
+
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .price-card {
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+      padding: 2.25rem; position: relative;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .price-card:hover { box-shadow: var(--shadow-md); }
+    .price-card.featured { border-color: var(--accent); box-shadow: var(--shadow-md); }
+    .price-card.featured::before {
+      content: 'Most Popular';
+      position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #fff;
+      font-size: .72rem; font-weight: 700; padding: .2rem .85rem; border-radius: 100px;
+      white-space: nowrap;
+    }
+    .price-tier { font-size: .8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .4rem; }
+    .price-amt {
+      font-size: 2.75rem; font-weight: 800; color: var(--text);
+      line-height: 1; margin-bottom: .25rem;
+    }
+    .price-amt span { font-size: 1rem; font-weight: 500; color: var(--muted); }
+    .price-desc { font-size: .875rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.5; }
+    .price-feats { margin-bottom: 2rem; }
+    .price-feats li {
+      display: flex; align-items: flex-start; gap: .6rem;
+      font-size: .9rem; padding: .45rem 0; border-bottom: 1px solid var(--border);
+    }
+    .price-feats li:last-child { border-bottom: none; }
+    .price-feats li svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+
+    .estimate-bar {
+      margin-top: 3rem;
+      background: var(--accent-lt); border: 1.5px dashed var(--accent);
+      border-radius: var(--radius); padding: 1.5rem 2rem;
+      display: flex; align-items: center; gap: 1.25rem;
+    }
+    .estimate-bar svg { width: 36px; height: 36px; color: var(--accent); flex-shrink: 0; }
+    .estimate-bar h3 { font-size: 1.0625rem; font-weight: 700; margin-bottom: .25rem; }
+    .estimate-bar p { font-size: .875rem; color: var(--muted); }
+
+    /* ── SERVICE AREA ──────────────────────────────────── */
+    #area { padding: 6rem 0; background: var(--bg-alt); }
+    .area-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .area-text .section-sub { margin-bottom: 2rem; }
+    .area-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-bottom: 1.5rem; }
+    .area-chip {
+      display: flex; align-items: center; gap: .5rem;
+      background: #fff; border-radius: 6px; padding: .525rem .75rem;
+      font-size: .875rem; font-weight: 500;
+    }
+    .area-chip svg { width: 13px; height: 13px; color: var(--accent); flex-shrink: 0; }
+    .area-note {
+      padding: 1rem 1.25rem; background: #fff;
+      border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0;
+      font-size: .875rem; color: var(--muted);
+    }
+    .area-img img { width: 100%; height: 440px; object-fit: cover; border-radius: 16px; }
+
+    /* ── FAQ ───────────────────────────────────────────── */
+    #faq { padding: 6rem 0; }
+    .faq-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
+    .faq-sidebar .section-sub { margin-bottom: 2rem; }
+    .faq-promo {
+      background: var(--accent); color: #fff;
+      padding: 1.625rem; border-radius: var(--radius); margin-top: 2rem;
+    }
+    .faq-promo h3 { font-size: 1.0625rem; font-weight: 700; margin-bottom: .4rem; }
+    .faq-promo p { font-size: .875rem; opacity: .88; margin-bottom: 1rem; line-height: 1.55; }
+    .faq-promo a {
+      display: inline-block; background: #fff; color: var(--accent);
+      padding: .55rem 1.25rem; border-radius: 6px; font-size: .875rem; font-weight: 700;
+      transition: opacity .15s;
+    }
+    .faq-promo a:hover { opacity: .88; }
+
+    .faq-list { display: flex; flex-direction: column; gap: .625rem; }
+    .faq-item { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .faq-q {
+      width: 100%; text-align: left; padding: 1.25rem 1.5rem;
+      background: #fff; font-size: .9875rem; font-weight: 600; color: var(--text);
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      transition: background .15s, color .15s;
+    }
+    .faq-q:hover { background: var(--accent-lt); }
+    .faq-q.open { color: var(--accent); background: var(--accent-lt); }
+    .faq-chev { width: 20px; height: 20px; flex-shrink: 0; transition: transform .25s; }
+    .faq-q.open .faq-chev { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .3s ease, padding .3s ease;
+      background: #fff; padding: 0 1.5rem;
+    }
+    .faq-a.open { max-height: 320px; padding: 0 1.5rem 1.25rem; }
+    .faq-a p { font-size: .9rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── CONTACT ───────────────────────────────────────── */
+    #contact { padding: 6rem 0; background: var(--bg-alt); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1.55fr; gap: 5rem; align-items: start; }
+    .contact-text .section-sub { margin-bottom: 2rem; }
+
+    .contact-details { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2.25rem; }
+    .c-detail { display: flex; align-items: flex-start; gap: 1rem; }
+    .c-icon {
+      width: 40px; height: 40px; background: var(--accent-lt);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .c-icon svg { width: 17px; height: 17px; color: var(--accent); }
+    .c-label { font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .c-val { font-size: .9875rem; font-weight: 600; color: var(--text); }
+    .c-val a:hover { color: var(--accent); }
+
+    .hours-box { background: #fff; border-radius: var(--radius); padding: 1.25rem; }
+    .hours-box h4 { font-size: .8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: .75rem; }
+    .hours-row { display: flex; justify-content: space-between; font-size: .875rem; padding: .325rem 0; border-bottom: 1px solid var(--border); }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { color: var(--muted); }
+    .hours-row .time { font-weight: 600; }
+
+    .form-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 16px; padding: 2.5rem;
+    }
+    .form-card h3 { font-size: 1.375rem; font-weight: 800; margin-bottom: .4rem; }
+    .form-card .sub { font-size: .9rem; color: var(--muted); margin-bottom: 1.75rem; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .fg { display: flex; flex-direction: column; gap: .375rem; }
+    .fg.full { grid-column: 1 / -1; }
+    .fg label { font-size: .8125rem; font-weight: 600; }
+    .fg label .req { color: var(--accent); }
+    .fg input, .fg select, .fg textarea {
+      padding: .75rem 1rem; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: .9375rem; color: var(--text);
+      background: #fff; outline: none;
+      transition: border-color .15s, box-shadow .15s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .fg select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235c5c5c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,96,10,.1);
+    }
+    .fg input.err, .fg select.err, .fg textarea.err { border-color: #ef4444; }
+    .field-err { font-size: .78rem; color: #ef4444; }
+    .fg textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      margin-top: .75rem; width: 100%; padding: 1rem 1.5rem;
+      background: var(--accent); color: #fff; border-radius: 8px;
+      font-size: 1rem; font-weight: 700;
+      transition: background .15s, transform .15s;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+    }
+    .form-submit:hover { background: var(--accent-dk); transform: translateY(-1px); }
+    .form-submit:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+
+    .form-success { display: none; text-align: center; padding: 2.5rem 1rem; }
+    .form-success .check-icon { width: 60px; height: 60px; margin: 0 auto 1rem; }
+    .form-success h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: .5rem; }
+    .form-success p { font-size: .9rem; color: var(--muted); }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    footer { background: #111; color: #999; padding: 4rem 0 0; }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 3rem; padding-bottom: 3rem;
+      border-bottom: 1px solid #222;
+    }
+    .footer-brand .logo { color: #fff; margin-bottom: 1rem; }
+    .footer-brand p { font-size: .875rem; color: #666; line-height: 1.65; margin-bottom: 1.25rem; }
+    .social-row { display: flex; gap: .625rem; }
+    .soc {
+      width: 36px; height: 36px; background: #1e1e1e; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .soc:hover { background: var(--accent); }
+    .soc svg { width: 15px; height: 15px; fill: #fff; }
+
+    .footer-col h4 { font-size: .8125rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 1.125rem; }
+    .footer-col li + li { margin-top: .6rem; }
+    .footer-col a { font-size: .875rem; color: #666; transition: color .15s; }
+    .footer-col a:hover { color: var(--accent); }
+
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: .75rem;
+      padding: 1.5rem 0; font-size: .8125rem; color: #444;
+    }
+    .footer-bottom a { color: #444; }
+    .footer-bottom a:hover { color: var(--accent); }
+
+    /* ── MOBILE STICKY CTA ─────────────────────────────── */
+    .mob-cta {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0;
+      z-index: 900; padding: .75rem 1rem;
+      background: #fff; border-top: 1px solid var(--border);
+      box-shadow: 0 -4px 20px rgba(0,0,0,.1);
+    }
+    .mob-cta a {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      background: var(--accent); color: #fff;
+      padding: .9rem; border-radius: 8px;
+      font-size: 1.0625rem; font-weight: 700;
+    }
+    .mob-cta svg { width: 18px; height: 18px; fill: #fff; }
+
+    /* ── RESPONSIVE ────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .about-photo-wrap img { height: 380px; }
+      .exp-badge { right: 0; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .main-nav, .header-phone { display: none; }
+      .menu-btn { display: flex; }
+      .hero-content { padding: 3rem 0; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .steps::before { display: none; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-grid .gal-item { height: 200px; }
+      .test-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .area-inner { grid-template-columns: 1fr; }
+      .area-img { display: none; }
+      .faq-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .mob-cta { display: block; }
+      body { padding-bottom: 76px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .estimate-bar { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn { justify-content: center; }
+      .area-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Skip link -->
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- ── HEADER ─────────────────────────────────────────── -->
+<header id="header" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <a href="#hero" class="logo" aria-label="Mike's Handyman Services — home">
+        <div class="logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+            <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </div>
+        Mike's Handyman
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a href="tel:+15551234567" class="header-phone" aria-label="Call us at (555) 123-4567">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.7 9.74a19.79 19.79 0 01-3.07-8.67A2 2 0 012.63 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.55a16 16 0 006.54 6.54l.82-.97a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        (555) 123-4567
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+        <svg id="menuIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="22" height="22" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile nav -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="#services" class="mob-link">Services</a>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#gallery" class="mob-link">Gallery</a>
+  <a href="#pricing" class="mob-link">Pricing</a>
+  <a href="#faq" class="mob-link">FAQ</a>
+  <a href="#contact" class="mob-link">Contact</a>
+  <a href="tel:+15551234567" class="mob-link mobile-nav-phone">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" width="18" height="18" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.7 9.74a19.79 19.79 0 01-3.07-8.67A2 2 0 012.63 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.55a16 16 0 006.54 6.54l.82-.97a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+    Call (555) 123-4567
+  </a>
+</nav>
+
+<!-- ── MAIN CONTENT ────────────────────────────────────── -->
+<main id="main">
+
+  <!-- ── HERO ──── -->
+  <section id="hero" aria-labelledby="heroTitle">
+    <div class="hero-bg" role="img" aria-label="Handyman working on a home repair project"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><circle cx="12" cy="12" r="10"/></svg>
+          Available Now — Same Week Scheduling
+        </div>
+        <h1 class="hero-title" id="heroTitle">
+          Your <span>Reliable</span><br>Local Handyman
+        </h1>
+        <p class="hero-tagline">No job too small. Done right the first time.<br>Licensed, insured, and ready to help.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" width="17" height="17" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            Get a Free Quote
+          </a>
+          <a href="tel:+15551234567" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="17" height="17" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.7 9.74a19.79 19.79 0 01-3.07-8.67A2 2 0 012.63 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.55a16 16 0 006.54 6.54l.82-.97a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            Call Now
+          </a>
+        </div>
+        <div class="hero-trust" role="list">
+          <div class="trust-item" role="listitem">
+            <svg viewBox="0 0 24 24" fill="var(--accent)" width="16" height="16" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Licensed &amp; Insured
+          </div>
+          <div class="trust-item" role="listitem">
+            <svg viewBox="0 0 24 24" fill="var(--accent)" width="16" height="16" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+            4.9★ Avg. Rating
+          </div>
+          <div class="trust-item" role="listitem">
+            <svg viewBox="0 0 24 24" fill="var(--accent)" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+            15+ Years Experience
+          </div>
+          <div class="trust-item" role="listitem">
+            <svg viewBox="0 0 24 24" fill="var(--accent)" width="16" height="16" aria-hidden="true"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            Free Estimates
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ──── -->
+  <section id="services" aria-labelledby="servicesTitle">
+    <div class="container">
+      <div class="services-hd">
+        <span class="tag">What I Do</span>
+        <h2 class="section-title" id="servicesTitle">Services You Can Count On</h2>
+        <p class="section-sub">From leaky faucets to full room refresh — if it needs fixing, I've got it covered.</p>
+      </div>
+      <ul class="services-grid" role="list">
+
+        <li class="service-card">
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          <h3>Plumbing Repairs</h3>
+          <p>Leaky faucets, running toilets, slow drains, pipe fixes, and shutoff valve replacements.</p>
+        </li>
+
+        <li class="service-card">
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <h3>Electrical Fixes</h3>
+          <p>Outlet replacements, switch installs, ceiling fan mounting, and light fixture upgrades.</p>
+        </li>
+
+        <li class="service-card">
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+              <line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/>
+            </svg>
+          </div>
+          <h3>Carpentry</h3>
+          <p>Custom shelving, trim and molding repair, cabinet fixes, and wood patching.</p>
+        </li>
+
+        <li class="service-card">
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+            </svg>
+          </div>
+          <h3>Drywall</h3>
+          <p>Hole patches, crack repairs, texture matching, and smooth finish prep for painting.</p>
+        </li>
+
+        <li class="service-card">
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12h20M12 2v20"/><circle cx="12" cy="12" r="4"/>
+            </svg>
+          </div>
+          <h3>Painting</h3>
+          <p>Interior room painting, touch-ups, trim work, and exterior accent walls done cleanly.</p>
+        </li>
+
+        <li class="service-card">
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+            </svg>
+          </div>
+          <h3>Furniture Assembly</h3>
+          <p>IKEA, flat-pack, and ready-to-assemble furniture built quickly and correctly.</p>
+        </li>
+
+        <li class="service-card">
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <h3>Door &amp; Window Repair</h3>
+          <p>Sticking doors, broken locks, drafty windows, weatherstripping, and hinge replacements.</p>
+        </li>
+
+        <li class="service-card">
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>Pressure Washing</h3>
+          <p>Driveways, decks, siding, fences, and patios blasted clean and looking new.</p>
+        </li>
+
+        <li class="service-card">
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 6l3 13h12l3-13"/><path d="M1 6h22"/><path d="M8 6l2-4h4l2 4"/>
+            </svg>
+          </div>
+          <h3>Gutter Cleaning</h3>
+          <p>Full gutter clearing, downspout flushing, and minor repair to keep water flowing right.</p>
+        </li>
+
+        <li class="service-card">
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M12 2v2M12 20v2"/>
+            </svg>
+          </div>
+          <h3>General Repairs</h3>
+          <p>If it's broken, squeaky, or just not right — odds are I can fix it. Just ask.</p>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ──── -->
+  <section id="about" aria-labelledby="aboutTitle">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-photo-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1607400201515-c2c41c6cb38e?auto=format&fit=crop&w=700&q=80"
+            alt="Mike, owner of Mike's Handyman Services, wearing a work shirt and tool belt"
+            width="700" height="520" loading="lazy"
+          >
+          <div class="exp-badge" aria-label="15 years of experience">
+            <span class="num">15+</span>
+            <span class="lbl">Years Experience</span>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <span class="tag">About Mike</span>
+          <h2 class="section-title" id="aboutTitle">One Person.<br>One Standard of Work.</h2>
+          <p class="section-sub">When you call Mike's Handyman Services, you get Mike — not a rotating crew of subcontractors.</p>
+          <p class="about-bio">
+            I started this business because I believe homeowners deserve reliable, honest work at a fair price.
+            With over 15 years of hands-on experience across plumbing, electrical, carpentry, and general repairs,
+            I take pride in every job — big or small. I show up on time, communicate clearly, and don't leave
+            until you're satisfied. Your home is important to you, and I treat it that way.
+          </p>
+
+          <div class="pill-row" role="list">
+            <span class="pill" role="listitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Licensed &amp; Insured
+            </span>
+            <span class="pill" role="listitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Background Checked
+            </span>
+            <span class="pill" role="listitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Satisfaction Guaranteed
+            </span>
+            <span class="pill" role="listitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              No Hidden Fees
+            </span>
+          </div>
+
+          <div class="about-stats" role="list">
+            <div class="stat" role="listitem">
+              <span class="n">500+</span>
+              <span class="l">Jobs Completed</span>
+            </div>
+            <div class="stat" role="listitem">
+              <span class="n">4.9★</span>
+              <span class="l">Avg. Review</span>
+            </div>
+            <div class="stat" role="listitem">
+              <span class="n">98%</span>
+              <span class="l">Repeat Clients</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ──── -->
+  <section id="how" aria-labelledby="howTitle">
+    <div class="container">
+      <div class="how-hd">
+        <span class="tag">The Process</span>
+        <h2 class="section-title" id="howTitle">Simple as 1, 2, 3</h2>
+        <p class="section-sub">Getting your home fixed shouldn't be complicated. Here's exactly how it works.</p>
+      </div>
+      <ol class="steps">
+        <li class="step-card">
+          <div class="step-num" aria-hidden="true">1</div>
+          <h3>Request a Quote</h3>
+          <p>Fill out the form below or call directly. Describe what needs fixing and your preferred timeframe — I'll get back to you same day.</p>
+        </li>
+        <li class="step-card">
+          <div class="step-num" aria-hidden="true">2</div>
+          <h3>Get a Clear Estimate</h3>
+          <p>I'll assess the job and give you a straightforward written estimate with no surprises. No pressure, no upsells — just honest numbers.</p>
+        </li>
+        <li class="step-card">
+          <div class="step-num" aria-hidden="true">3</div>
+          <h3>Job Done Right</h3>
+          <p>I show up on time, work cleanly, and don't leave until the job is finished to your satisfaction. Payment only due on completion.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ── GALLERY ──── -->
+  <section id="gallery" aria-labelledby="galleryTitle">
+    <div class="container">
+      <div class="gallery-hd">
+        <span class="tag">Recent Work</span>
+        <h2 class="section-title" id="galleryTitle">Work That Speaks for Itself</h2>
+        <p class="section-sub">A sample of recent jobs — before-and-after results customers love.</p>
+      </div>
+      <div class="gallery-grid" role="list" aria-label="Project gallery">
+        <div class="gal-item" role="listitem">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=75"
+               alt="Carpenter's tools laid out on a wooden workbench" loading="lazy" width="800" height="260">
+        </div>
+        <div class="gal-item" role="listitem">
+          <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=800&q=75"
+               alt="Plumber working on under-sink pipes with a wrench" loading="lazy" width="800" height="260">
+        </div>
+        <div class="gal-item" role="listitem">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=75"
+               alt="Close-up of a power drill being used on a wall" loading="lazy" width="800" height="260">
+        </div>
+        <div class="gal-item" role="listitem">
+          <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=75"
+               alt="Home renovation in progress with tools and materials" loading="lazy" width="800" height="260">
+        </div>
+        <div class="gal-item" role="listitem">
+          <img src="https://images.unsplash.com/photo-1587939003752-56a06505a1a0?auto=format&fit=crop&w=800&q=75"
+               alt="Painter rolling fresh paint onto an interior wall" loading="lazy" width="800" height="260">
+        </div>
+        <div class="gal-item" role="listitem">
+          <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?auto=format&fit=crop&w=800&q=75"
+               alt="Technician inspecting completed home repair work" loading="lazy" width="800" height="260">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ──── -->
+  <section id="testimonials" aria-labelledby="testTitle">
+    <div class="container">
+      <div class="test-hd">
+        <span class="tag">Reviews</span>
+        <h2 class="section-title" id="testTitle">What Customers Say</h2>
+        <p class="section-sub">Don't take my word for it — here's what real customers think about the work.</p>
+      </div>
+      <div class="test-grid" role="list">
+
+        <article class="test-card" role="listitem">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="test-quote">
+            "Mike fixed a leak under my kitchen sink that two other plumbers quoted me double the price for.
+            He was here within 24 hours, explained everything clearly, and the price matched exactly what he estimated.
+            Finally found a handyman I can actually trust."
+          </blockquote>
+          <div class="test-author">
+            <div class="avatar" aria-hidden="true">S</div>
+            <div>
+              <div class="author-name">Sarah T.</div>
+              <div class="author-job">Plumbing Repair — Kitchen</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="test-card" role="listitem">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="test-quote">
+            "Had Mike patch drywall and repaint two rooms after a water damage repair. The texture match was
+            perfect — you can't even tell where the damage was. He worked fast, kept everything clean, and
+            charged a very fair rate. Will absolutely use him again."
+          </blockquote>
+          <div class="test-author">
+            <div class="avatar" aria-hidden="true">D</div>
+            <div>
+              <div class="author-name">David R.</div>
+              <div class="author-job">Drywall &amp; Painting — Living Room</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="test-card" role="listitem">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="test-quote">
+            "Called about a door that wouldn't close right and a stuck window — Mike came the next morning.
+            Both fixed in under two hours, and he noticed my bathroom fan wasn't venting properly and fixed
+            that too without charging extra. That's the kind of honest work that earns a loyal customer."
+          </blockquote>
+          <div class="test-author">
+            <div class="avatar" aria-hidden="true">L</div>
+            <div>
+              <div class="author-name">Linda M.</div>
+              <div class="author-job">Door Repair &amp; General Maintenance</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING ──── -->
+  <section id="pricing" aria-labelledby="pricingTitle">
+    <div class="container">
+      <div class="pricing-hd">
+        <span class="tag">Rates</span>
+        <h2 class="section-title" id="pricingTitle">Transparent Pricing</h2>
+        <p class="section-sub">Straightforward rates with no hidden fees. You'll always know the cost before I start.</p>
+      </div>
+
+      <div class="pricing-grid" role="list">
+
+        <div class="price-card" role="listitem" aria-label="Hourly Rate option">
+          <div class="price-tier">Hourly Rate</div>
+          <div class="price-amt">$75<span>/hr</span></div>
+          <p class="price-desc">Best for smaller, open-ended jobs where the scope isn't fully known upfront.</p>
+          <ul class="price-feats" aria-label="Included features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              1-hour minimum
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Materials billed separately at cost
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Progress updates included
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Pay on completion only
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-outline" style="width:100%;justify-content:center;">Get a Quote</a>
+        </div>
+
+        <div class="price-card featured" role="listitem" aria-label="Flat Rate option — most popular">
+          <div class="price-tier">Flat Rate</div>
+          <div class="price-amt">Fixed<span> price</span></div>
+          <p class="price-desc">Best for well-defined jobs. You know the total cost before I touch anything.</p>
+          <ul class="price-feats" aria-label="Included features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Written estimate upfront
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Price locked in — no surprises
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Materials included or itemized
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Pay on completion only
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">Get a Quote</a>
+        </div>
+
+        <div class="price-card" role="listitem" aria-label="Maintenance Package option">
+          <div class="price-tier">Maintenance Package</div>
+          <div class="price-amt">$199<span>/visit</span></div>
+          <p class="price-desc">Scheduled home maintenance visits to handle a list of to-dos in one efficient trip.</p>
+          <ul class="price-feats" aria-label="Included features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Up to 3 hours of labor
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Priority scheduling
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Task checklist provided
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Discounted materials rate
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-outline" style="width:100%;justify-content:center;">Get a Quote</a>
+        </div>
+
+      </div>
+
+      <div class="estimate-bar" role="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div>
+          <h3>All Estimates Are Free</h3>
+          <p>Not sure which option fits your project? Call or fill out the form and I'll give you a clear, no-obligation estimate — usually within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICE AREA ──── -->
+  <section id="area" aria-labelledby="areaTitle">
+    <div class="container">
+      <div class="area-inner">
+        <div class="area-text">
+          <span class="tag">Where I Work</span>
+          <h2 class="section-title" id="areaTitle">Serving the Greater Metro Area</h2>
+          <p class="section-sub">Based locally and proud to serve the communities I grew up in.</p>
+          <ul class="area-grid" role="list">
+            <li class="area-chip" role="listitem">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Downtown
+            </li>
+            <li class="area-chip" role="listitem">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Northside
+            </li>
+            <li class="area-chip" role="listitem">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Westfield
+            </li>
+            <li class="area-chip" role="listitem">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Riverside
+            </li>
+            <li class="area-chip" role="listitem">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Oakdale
+            </li>
+            <li class="area-chip" role="listitem">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Cedar Park
+            </li>
+            <li class="area-chip" role="listitem">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Maplewood
+            </li>
+            <li class="area-chip" role="listitem">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              South Haven
+            </li>
+            <li class="area-chip" role="listitem">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Greenhill
+            </li>
+            <li class="area-chip" role="listitem">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Fairview Heights
+            </li>
+          </ul>
+          <p class="area-note">Not sure if I cover your area? Give me a call — I often travel for larger jobs within a 30-mile radius.</p>
+        </div>
+        <div class="area-img">
+          <img
+            src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=75"
+            alt="Residential neighborhood with well-maintained homes"
+            loading="lazy" width="900" height="440"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ──── -->
+  <section id="faq" aria-labelledby="faqTitle">
+    <div class="container">
+      <div class="faq-inner">
+        <div class="faq-sidebar">
+          <span class="tag">FAQ</span>
+          <h2 class="section-title" id="faqTitle">Common Questions</h2>
+          <p class="section-sub">Everything you might want to know before booking — answered plainly.</p>
+          <div class="faq-promo" role="complementary">
+            <h3>Still have questions?</h3>
+            <p>I'm always happy to talk through a job before you commit to anything.</p>
+            <a href="tel:+15551234567">Call (555) 123-4567</a>
+          </div>
+        </div>
+
+        <div class="faq-list" role="list">
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq1">
+              How quickly can you come out?
+              <svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a" id="faq1" role="region">
+              <p>For most jobs I can be on-site within 2–3 business days. For emergencies like a leak or broken lock, I aim to respond same-day when my schedule allows. Call first for urgent situations.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq2">
+              Do you provide materials or do I need to buy them?
+              <svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a" id="faq2" role="region">
+              <p>I can handle material sourcing for you — it saves time and I know what brands hold up. Materials are billed at my cost with no markup. Alternatively, you're welcome to supply your own materials if you prefer.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq3">
+              Are you licensed and insured?
+              <svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a" id="faq3" role="region">
+              <p>Yes. I carry general liability insurance and hold a valid handyman contractor's license (License #HC-2024-0817). I'm happy to provide documentation before we start any work.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq4">
+              What payment methods do you accept?
+              <svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a" id="faq4" role="region">
+              <p>I accept cash, check, Venmo, Zelle, and all major credit cards. Payment is due on completion of the job — never before. For larger jobs over $500, I may ask for a small deposit to cover materials.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+              Do you guarantee your work?
+              <svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a" id="faq5" role="region">
+              <p>Absolutely. All labor comes with a 90-day workmanship guarantee. If something I repaired fails or doesn't perform as expected within 90 days, I'll come back and make it right at no additional charge.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq6">
+              Is there a minimum charge for small jobs?
+              <svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a" id="faq6" role="region">
+              <p>Yes — there's a 1-hour minimum for hourly work, which comes to $75. For very small jobs like hanging a few pictures or tightening a hinge, it often makes sense to bundle them with other to-dos to get the most value from the visit.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq7">
+              Can you handle larger renovation projects?
+              <svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a" id="faq7" role="region">
+              <p>I specialize in repairs and mid-size projects. For large full-room renovations or structural work, I'll give you an honest assessment and refer you to the right contractor if it's outside my scope — I'd rather steer you right than overcommit.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ──── -->
+  <section id="contact" aria-labelledby="contactTitle">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-text">
+          <span class="tag">Get in Touch</span>
+          <h2 class="section-title" id="contactTitle">Request a Free Quote</h2>
+          <p class="section-sub">Describe what you need and I'll get back to you same day with a clear estimate.</p>
+
+          <div class="contact-details">
+            <div class="c-detail">
+              <div class="c-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.7 9.74a19.79 19.79 0 01-3.07-8.67A2 2 0 012.63 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.55a16 16 0 006.54 6.54l.82-.97a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="c-label">Phone</div>
+                <a href="tel:+15551234567" class="c-val">(555) 123-4567</a>
+              </div>
+            </div>
+            <div class="c-detail">
+              <div class="c-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <div class="c-label">Email</div>
+                <a href="mailto:mike@mikeshandyman.com" class="c-val">mike@mikeshandyman.com</a>
+              </div>
+            </div>
+            <div class="c-detail">
+              <div class="c-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="c-label">Service Area</div>
+                <div class="c-val">Metro Area &amp; Surrounding Communities</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hours-box">
+            <h4>Business Hours</h4>
+            <div class="hours-row"><span class="day">Monday – Friday</span><span class="time">7:00 AM – 6:00 PM</span></div>
+            <div class="hours-row"><span class="day">Saturday</span><span class="time">8:00 AM – 4:00 PM</span></div>
+            <div class="hours-row"><span class="day">Sunday</span><span class="time">By appointment</span></div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Tell Me About Your Project</h3>
+          <p class="sub">I'll respond with a clear estimate — no pressure, no commitment required.</p>
+
+          <form id="quoteForm" novalidate>
+            <div class="form-grid">
+              <div class="fg">
+                <label for="fname">First Name <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="fname" name="fname" autocomplete="given-name" required aria-required="true" placeholder="John">
+                <span class="field-err" id="fname-err" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="fg">
+                <label for="lname">Last Name <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="lname" name="lname" autocomplete="family-name" required aria-required="true" placeholder="Smith">
+                <span class="field-err" id="lname-err" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="fg">
+                <label for="phone">Phone <span class="req" aria-hidden="true">*</span></label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" required aria-required="true" placeholder="(555) 000-0000">
+                <span class="field-err" id="phone-err" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="fg">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com">
+                <span class="field-err" id="email-err" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="fg full">
+                <label for="service">Service Needed <span class="req" aria-hidden="true">*</span></label>
+                <select id="service" name="service" required aria-required="true">
+                  <option value="" disabled selected>Select a service…</option>
+                  <option>Plumbing Repairs</option>
+                  <option>Electrical Fixes</option>
+                  <option>Carpentry</option>
+                  <option>Drywall</option>
+                  <option>Painting</option>
+                  <option>Furniture Assembly</option>
+                  <option>Door &amp; Window Repair</option>
+                  <option>Pressure Washing</option>
+                  <option>Gutter Cleaning</option>
+                  <option>General Repairs</option>
+                  <option>Multiple / Other</option>
+                </select>
+                <span class="field-err" id="service-err" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="fg full">
+                <label for="desc">Describe the Job <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="desc" name="desc" required aria-required="true" placeholder="Tell me what's happening — the more detail the better so I can give you an accurate estimate."></textarea>
+                <span class="field-err" id="desc-err" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="fg full">
+                <label for="timing">Preferred Timing</label>
+                <select id="timing" name="timing">
+                  <option value="" disabled selected>When do you need this done?</option>
+                  <option>As soon as possible</option>
+                  <option>Within this week</option>
+                  <option>Within 2 weeks</option>
+                  <option>This month</option>
+                  <option>No rush — just getting estimates</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="form-submit" id="submitBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Send My Request
+            </button>
+          </form>
+
+          <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+            <svg class="check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" fill="#dcfce7"/>
+              <path d="M8 12l3 3 5-5" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Request Received!</h3>
+            <p>Thanks — I'll review the details and get back to you within a few hours with a clear estimate. In the meantime, feel free to call if it's urgent.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="#hero" class="logo" aria-label="Mike's Handyman Services — back to top">
+          <div class="logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+              <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          Mike's Handyman
+        </a>
+        <p>Professional home repairs done right the first time. Licensed, insured, and proud to serve the community.</p>
+        <div class="social-row">
+          <a href="#" class="soc" aria-label="Facebook" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" class="soc" aria-label="Instagram" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="#fff" stroke-width="2"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" fill="#fff"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+          <a href="#" class="soc" aria-label="Google Business" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          </a>
+          <a href="#" class="soc" aria-label="Nextdoor" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm1 14.5h-2v-5H9v-2h2V8a3 3 0 016 0v.5h-2V8a1 1 0 00-2 0v1.5h2v2h-2v5z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Services links">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Plumbing Repairs</a></li>
+          <li><a href="#services">Electrical Fixes</a></li>
+          <li><a href="#services">Carpentry</a></li>
+          <li><a href="#services">Drywall &amp; Painting</a></li>
+          <li><a href="#services">Pressure Washing</a></li>
+          <li><a href="#services">Gutter Cleaning</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-col" aria-label="Quick links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Mike</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+15551234567">(555) 123-4567</a></li>
+          <li><a href="mailto:mike@mikeshandyman.com">mike@mikeshandyman.com</a></li>
+          <li><a href="#area">Service Area Map</a></li>
+          <li><a href="#contact">Get a Free Estimate</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Mike's Handyman Services. All rights reserved.</span>
+      <span>License #HC-2024-0817 &nbsp;|&nbsp; Fully Insured</span>
+      <span>
+        <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+        <a href="#">Terms of Service</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile sticky CTA -->
+<div class="mob-cta" role="complementary" aria-label="Call to action">
+  <a href="tel:+15551234567" aria-label="Call Mike's Handyman Services at (555) 123-4567">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.7 9.74a19.79 19.79 0 01-3.07-8.67A2 2 0 012.63 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.55a16 16 0 006.54 6.54l.82-.97a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+    Call Now — (555) 123-4567
+  </a>
+</div>
+
+<script>
+  // ── YEAR ──
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ── HEADER SCROLL SHADOW ──
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  // ── MOBILE NAV ──
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const menuIcon = document.getElementById('menuIcon');
+
+  const closeIcon = `<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>`;
+  const openIcon  = `<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>`;
+
+  function toggleMenu(force) {
+    const open = force !== undefined ? force : !mobileNav.classList.contains('open');
+    mobileNav.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+    menuIcon.innerHTML = open ? closeIcon : openIcon;
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  menuBtn.addEventListener('click', () => toggleMenu());
+
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => toggleMenu(false));
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mobileNav.classList.contains('open')) toggleMenu(false);
+  });
+
+  // ── ACTIVE NAV ON SCROLL ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.main-nav a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // ── FAQ ACCORDION ──
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const open = btn.classList.contains('open');
+      // close all
+      document.querySelectorAll('.faq-q').forEach(b => {
+        b.classList.remove('open');
+        b.setAttribute('aria-expanded', 'false');
+        document.getElementById(b.getAttribute('aria-controls'))?.classList.remove('open');
+      });
+      // open this one if it was closed
+      if (!open) {
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        document.getElementById(btn.getAttribute('aria-controls'))?.classList.add('open');
+      }
+    });
+  });
+
+  // ── FORM VALIDATION & SUBMISSION ──
+  const form = document.getElementById('quoteForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formSuccess = document.getElementById('formSuccess');
+
+  function validateField(id, errId, check, msg) {
+    const el = document.getElementById(id);
+    const err = document.getElementById(errId);
+    if (!check(el)) {
+      el.classList.add('err');
+      if (err) err.textContent = msg;
+      return false;
+    }
+    el.classList.remove('err');
+    if (err) err.textContent = '';
+    return true;
+  }
+
+  function clearErr(inputId, errId) {
+    const el = document.getElementById(inputId);
+    const err = document.getElementById(errId);
+    el?.classList.remove('err');
+    if (err) err.textContent = '';
+  }
+
+  ['fname','lname','phone','service','desc'].forEach(id => {
+    const errId = id + '-err';
+    document.getElementById(id)?.addEventListener('input', () => clearErr(id, errId));
+    document.getElementById(id)?.addEventListener('change', () => clearErr(id, errId));
+  });
+  document.getElementById('email')?.addEventListener('input', () => clearErr('email', 'email-err'));
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const emailVal = document.getElementById('email').value.trim();
+    const emailOk = !emailVal || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+
+    const valid = [
+      validateField('fname', 'fname-err', el => el.value.trim().length >= 2, 'Please enter your first name.'),
+      validateField('lname', 'lname-err', el => el.value.trim().length >= 2, 'Please enter your last name.'),
+      validateField('phone', 'phone-err', el => /[\d\s\-\(\)]{7,}/.test(el.value.trim()), 'Please enter a valid phone number.'),
+      validateField('email', 'email-err', () => emailOk, 'Please enter a valid email address.'),
+      validateField('service', 'service-err', el => el.value !== '', 'Please select a service.'),
+      validateField('desc', 'desc-err', el => el.value.trim().length >= 10, 'Please describe the job (at least 10 characters).'),
+    ].every(Boolean);
+
+    if (!valid) {
+      const firstErr = form.querySelector('.err');
+      firstErr?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstErr?.focus();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    // Simulate async submission
+    setTimeout(() => {
+      form.style.display = 'none';
+      formSuccess.style.display = 'block';
+      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 900);
+  });
+</script>
+</body>
+</html>
